@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: #f6f6f5;
+    scroll-behavior: smooth;
+}
+
+input,
+select {
+    outline: none;
+}
+
+.batch_heart {
+    background: tomato;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    position: absolute;
+    right: -24%;
+    top: -9%;
+    cursor: pointer;
+}
+
+/* app.css */
+
+/* Định nghĩa hiệu ứng băng chuyền */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Di chuyển 50% của container để có hiệu ứng liên tục */
+}
+
+/* Áp dụng animation cho phần tử chứa các nhóm hình ảnh */
+.animate-marquee {
+    display: flex;
+    width: 200%;
+    /* Chiều rộng gấp đôi để chứa hai nhóm hình ảnh */
+    animation: marquee 30s linear infinite;
+    /* Điều chỉnh tốc độ di chuyển theo nhu cầu */
+}
+
+/* Tạo kiểu dáng cho các khối chứa hình ảnh */
+.sponsored-container {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 140px;
+    /* Chiều cao của container */
+    background-color: #f5f5f5;
+    /* Màu nền cho container */
+    border-radius: 12px;
+    /* Bo tròn các góc của container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Hiệu ứng bóng đổ */
+}
+
+.sponsored-item {
+    flex: 0 0 auto;
+    padding: 0 1rem;
+    /* Khoảng cách giữa các hình ảnh */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sponsored-item img {
+    width: 180px;
+    /* Đặt chiều rộng cố định cho hình ảnh */
+    height: 100px;
+    /* Đặt chiều cao cố định cho hình ảnh */
+    object-fit: contain;
+    /* Giữ tỷ lệ gốc của hình ảnh */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Hiệu ứng chuyển động mượt mà */
+}
+
+.sponsored-item img:hover {
+    transform: scale(1.1);
+    /* Phóng to hình ảnh khi hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Tăng hiệu ứng bóng đổ khi hover */
+}
+
+
+.logo1 {
+    /* animation: walk 3s infinite linear; */
+    /* Hiệu ứng đi bộ cho logo1 */
+}
+
+.logo2 {
+    /* Không có animation cho logo2 */
+}
+
+/* Hiệu ứng đi bộ cho logo1 */
+@keyframes walk {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Add these styles to your CSS file, e.g., App.css */
+.dataGridContainer {
+    padding-left: 2rem;
+    /* pl-8 equivalent */
+    padding-top: 0.25rem;
+    /* pt-1 equivalent */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.MuiDataGrid-root {
+    background-color: white;
+    border-radius: 0;
+    border: none;
+}
+
+.MuiDataGrid-columnHeaders {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: bold;
+    font-size: 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.MuiDataGrid-cell {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.MuiDataGrid-row {
+    background-color: #fff;
+}
+
+.MuiDataGrid-row:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+
+.MuiDataGrid-row:hover {
+    background-color: #e9ecef;
+}
+
+.greenColor {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.redColor {
+    color: #35c40a;
+    font-weight: bold;
+}
+
+.customButton {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-size: 14px;
+}
+
+.customButton:hover {
+    color: #0056b3;
+}
+
+.greenColor {
+    color: green;
+}
+
+.redColor {
+    color: red;
+}
+
+.processingColor {
+    color: #28a745;
+    /* Màu xanh lá */
+}
+
+.headerCell {
+    border-right: 1px solid #e0e0e0;
+    padding-right: 10px;
+}
+
+.headerCell:last-child {
+    border-right: none;
+}
+
+.cellSeparator {
+    border-right: 1px solid #e0e0e0;
+}
+
+.cellSeparator:last-child {
+    border-right: none;
+}
+
+
+
+@keyframes textAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animate-text {
+    animation: textAnimation 1.5s ease-in-out infinite;
+}
