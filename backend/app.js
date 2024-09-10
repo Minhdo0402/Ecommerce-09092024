@@ -4,7 +4,20 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const PORT = process.env.PORT || 8000;
 
+
+app.get('/', (req, res) => {
+    res.send('Server is up and running!');
+  });
+  
+
+
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
 
 
 app.use(express.json());
