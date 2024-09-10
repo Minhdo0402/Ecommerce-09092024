@@ -23,7 +23,7 @@ app.listen(PORT, () => {
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ['https://ecommerce-09092024-7xvb.vercel.app',],
+    origin: ['https://ecommerce-frontend-beta-pink.vercel.app',],
     credentials: true
   }));
   
