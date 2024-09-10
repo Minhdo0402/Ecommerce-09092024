@@ -11,39 +11,37 @@ const { isAuthenticated, isSeller } = require("../middleware/auth");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendShopToken = require("../utils/shopToken");
+const cloudinary = require("cloudinary");
 
 // create shop
-router.post("/create-shop", upload.single("file"), async (req, res, next) => {
+router.post("/create-shop", catchAsyncErrors(async (req, res, next) => {
   try {
     const { email } = req.body;
     const sellerEmail = await Shop.findOne({ email });
-
     if (sellerEmail) {
-      const filename = req.file.filename;
-      const filePath = `uploads/${filename}`;
-
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({ message: "Error deleting file" });
-        }
-      });
       return next(new ErrorHandler("User already exists", 400));
     }
-    const filename = req.file.filename;
-    const fileUrl = path.join(filename);
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+    });
+
 
     const seller = {
       name: req.body.name,
       email: email,
       password: req.body.password,
-      avatar: fileUrl,
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
       address: req.body.address,
       phoneNumber: req.body.phoneNumber,
       zipCode: req.body.zipCode,
     };
 
     const activationToken = createActivationToken(seller);
+
     const activationUrl = `https://ecommerce-frontend-beta-pink.vercel.app/seller/activation/${activationToken}`;
 
     try {
@@ -52,10 +50,9 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
         subject: "Activate your Shop",
         message: `Hello ${seller.name}, please click on the link to activate your shop: ${activationUrl}`,
       });
-
-      return res.status(201).json({
+      res.status(201).json({
         success: true,
-        message: `Please check your email: ${seller.email} to activate your shop!`,
+        message: `please check your email:- ${seller.email} to activate your shop!`,
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
@@ -63,7 +60,8 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
   } catch (error) {
     return next(new ErrorHandler(error.message, 400));
   }
-});
+}));
+
 
 // create activation token
 const createActivationToken = (seller) => {
